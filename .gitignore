@@ -1,0 +1,6 @@
+/.project-map/
+__pycache__/
+*.pyc
+config.json
+selection.json
+*.log

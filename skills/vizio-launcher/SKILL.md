@@ -1,0 +1,16 @@
+---
+name: vizio-launcher
+description: Set up, operate, troubleshoot, or extend the Simple Vizio Launcher and play a user-selected local video on a paired Vizio TV. Use when the user asks to control this launcher or show local media through it; do not apply to unrelated TV platforms.
+---
+
+# Vizio launcher
+
+Find the Simple Vizio Launcher checkout and read its README before changing setup or behavior. Check the actual running service and TV state; recorded addresses and tokens can change. Do not print or commit `config.json`, pairing tokens, serials, MAC addresses, private media, or household network details.
+
+The launcher serves a local page and polls TV app state; it does not replace the OS or truly intercept physical keys. Pair with `python launcher.py pair TV_IP`, then run `python launcher.py run`. To install it for independent use on Windows, after pairing and testing, run `./install-startup.ps1` for the current user when requested; this sets a per-user login entry and does not require Codex to stay open. Use `./install-startup.ps1 -Remove` to remove the entry. Explain that the PC must be signed in and awake, and verify startup after a future sign-in where possible. On other systems, use the platform's ordinary user-level startup mechanism. Use a trusted LAN, never port-forward its service, and never send a custom URL to namespace 4 app ID 1. The temporary webview uses namespace 4 app ID 3001. Apps and key codes vary by firmware; distinguish API acknowledgement from confirmed visible behavior.
+
+Users can request changes in ordinary language: for example, larger buttons, different colors or ordering, favorite apps, shortcuts, and selection behavior. Inspect the existing page and service, implement the requested change, preserve the original-home escape, and test navigation and any TV-specific behavior appropriate to the change. Explain compatibility limits and verify the running version when feasible; do not add features that were not requested.
+
+For a user's explicit request to play a video, use `python video.py "PATH"` from the checkout and keep the process alive. It temporarily serves only that chosen file. A screen-filling player with progress bar, OK pause/play, and left/right seeking while paused was confirmed on one TV; other formats and models remain unverified. Check with the user if behavior is unclear. If a file cannot play, inspect codec support and explain options before converting or modifying it. Do not add a media library or change the permanent launcher unless requested.
+
+When the Vizio Home button is used, the watcher deliberately leaves the original home open. A repeated Home press may not be observable while the TV remains in the same home state; opening an app and then pressing Home returns to the simple screen. The optional WatchFree redirect acts on app state and therefore affects all ways of opening WatchFree.
