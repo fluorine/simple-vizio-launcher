@@ -28,6 +28,22 @@ Local video: H.264/AAC MP4 clips, including a 1080p sample, played on the same T
 
 ## Set up
 
+### Recommended: ask an AI assistant to configure it
+
+If your AI assistant can read local files and run commands on your computer, give it the path to your downloaded repository and this prompt. The assistant can walk through the setup, do the computer-side work, and pause when it needs you to read a code from the TV or confirm a system setting.
+
+> I want you to set up Simple Vizio Launcher from this repository on my computer and TV. The repository folder is: **[paste the full path to the repository here]**. If I have not given you a usable folder path, ask me for it first.
+>
+> Read the repository README and inspect the project before making changes. Check my operating system, Python version, network setup, and the launcher's current files. Install only dependencies the project actually needs. Help me find the TV's local IP address using its network information, then pair it with the launcher. Tell me when to look at the TV for the pairing code and let me enter that code locally; never ask me to paste or reveal the pairing token. Keep `config.json` private and out of version control.
+>
+> Start the launcher and guide me to open Vizio Home so we can confirm the simple screen appears and the remote can launch an app. If I want it to work without this AI or a terminal open, configure the documented per-user startup option for my operating system so it starts after I sign in. Before changing startup or firewall settings, explain the specific change and ask me to approve it. Allow network access only on my trusted private home network if needed. Do not change router settings, expose a port to the internet, or send custom URLs to undocumented TV app IDs. Make sure I can stop and uninstall the launcher, and show me how.
+>
+> Keep troubleshooting steps focused on this repository. Do not print, upload, commit, or send pairing tokens, passwords, serial numbers, MAC addresses, household IP details, logs, or private media. Verify each step with me, distinguish what we confirmed on the TV from what is only configured on the computer, and tell me what requires the computer to stay on, signed in, and awake.
+
+The pairing code must be read from the TV by you and entered locally when prompted. The assistant should not need your router password or TV account password. The computer and TV must be on the same trusted network. To have the launcher start without Codex, the computer still needs to be on, signed in, and awake. The Windows startup installer has not yet been tested end-to-end after a fresh sign-in.
+
+### Manual setup
+
 1. Install Python 3.10 or later. Put this folder on a computer on the same trusted home network as the TV. Leave the TV on.
 2. Find the TV's local IPv4 address in its network information. If possible, reserve its address in your router so it does not change.
 3. In a terminal in this folder, pair with the TV (replace the example address with yours):
@@ -72,13 +88,7 @@ python video.py "/path/to/your/video.mp4"
 
 Use the path to an existing MP4, M4V, or WebM file; only that chosen file is served, temporarily. The TV should show the video across the screen. The intended remote controls are OK to pause/play, Left/Right to seek 5 seconds, and Home to exit. A progress bar appears during interaction. Keep the command running while watching and stop it with Ctrl+C afterward. Autoplay may be blocked, in which case press OK. These controls are experimental; try a short file first. The launcher service must be running for Home to return to the simple menu.
 
-## Ask an AI assistant to help set it up
-
-If you use an agent that can inspect files and run commands on your computer, you can give it this prompt:
-
-> Help me configure Simple Vizio Launcher from this repository on my own TV and home network. First inspect the README and my environment. Help me find the TV's local address and pair it using the code shown on the TV; keep the pairing token private. Set up the launcher for my computer, test it with me, and explain how to start or stop it. Ask me before changing my TV, firewall, or startup settings, and do not expose any service to the internet. Tell me which steps were verified on my actual TV and what remains untested.
-
-For a video later, provide the local path and ask the assistant to use the separate video command. Never paste passwords or pairing tokens into a public issue or chat.
+For a video later, give the assistant the local path and ask it to use the separate video command. Never paste passwords or pairing tokens into a public issue or chat.
 
 To customize the launcher, tell your assistant what you want to see or change. For example:
 
