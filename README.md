@@ -32,7 +32,7 @@ Local video: H.264/AAC MP4 clips, including a 1080p sample, played on the same T
 
 If your AI assistant can read local files and run commands on your computer, give it the path to your downloaded repository and this prompt. The assistant can walk through the setup, do the computer-side work, and pause when it needs you to read a code from the TV or confirm a system setting.
 
-> I want you to set up Simple Vizio Launcher from this repository on my computer and TV. The repository folder is: **[paste the full path to the repository here]**. If I have not given you a usable folder path, ask me for it first.
+> I want you to set up Simple Vizio Launcher from this repository on my computer and TV. The repository folder is: **https://github.com/fluorine/simple-vizio-launcher**. If I have not given you a usable folder path, ask me for it first.
 >
 > Read the repository README and inspect the project before making changes. Check my operating system, Python version, network setup, and the launcher's current files. Install only dependencies the project actually needs. Help me find the TV's local IP address using its network information, then pair it with the launcher. Tell me when to look at the TV for the pairing code and let me enter that code locally; never ask me to paste or reveal the pairing token. Keep `config.json` private and out of version control.
 >
