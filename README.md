@@ -12,7 +12,7 @@ The idea is similar to [couch-tv](https://github.com/Seagey/couch-tv), another p
 
 - Shows YouTube, Netflix and Prime Video in a large, high-contrast row. A smaller Vizio Home button opens the original home screen.
 - Uses the television remote's arrows and OK. Remembers the last focused app across visits; the Vizio Home button is excluded.
-- Watches for Vizio Home and opens the simple screen. Optionally redirects WatchFree to YouTube.
+- Checks the TV power state before watching apps, then opens the simple screen when Vizio Home is active. A remote Home or app button can wake the TV; the launcher responds after it reports as on. Optionally redirects WatchFree to YouTube while the TV is on.
 - Includes an experimental separate command to serve one specified local video to a TV-sized player, without adding a video library to the launcher.
 - Includes an [agent skill](skills/vizio-launcher/SKILL.md) for setup, troubleshooting and local video requests.
 
@@ -22,7 +22,7 @@ This is experimental, not affiliated with Vizio, Netflix, YouTube, or Amazon. Th
 
 On one **VQD55M-0804**, firmware **86.920.9.3-2**, a prototype displayed the screen, responded to the remote, launched YouTube and Prime Video, remembered selection, opened the original home, and redirected WatchFree to YouTube. The approach is not necessarily limited to that model, but other models and the generalized pairing/setup workflow have not been verified on hardware. App identifiers can vary by model; Netflix has not been independently confirmed on that TV.
 
-The computer must be on, signed in, awake and on the same network. Once you intentionally enter Vizio Home, a second Home press while already there cannot be distinguished by the current polling approach; open an app and then press Home to return to the simple screen. When the service is stopped, the original home remains available. If the computer goes to sleep while the custom page is open, press the TV's Home button to return to Vizio Home.
+The computer must be on, signed in, awake and on the same network. The launcher checks `/state/device/power_mode` and does not issue app-launch commands unless the TV reports power mode `1` (on); if the power state cannot be read, it waits. This avoids treating a stale Home app value in standby as an instruction to launch the page. A remote Home or app button can wake the TV, after which the launcher may open its simple screen when it sees Vizio Home. Once you intentionally enter Vizio Home, a second Home press while already there cannot be distinguished by the current polling approach; open an app and then press Home to return to the simple screen. When the service is stopped, the original home remains available. If the computer goes to sleep while the custom page is open, press the TV's Home button to return to Vizio Home.
 
 Local video: H.264/AAC MP4 clips, including a 1080p sample, played on the same TV. The owner confirmed the screen-filling player, progress bar, and 5-second seeking while paused. Other video formats remain unverified. Codec support depends on the TV. This is not a file browser, transcoder, or permanent launcher tile.
 

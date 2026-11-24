@@ -71,10 +71,18 @@ class Launcher:
     def launch(self, namespace, app_id, message=None):
         return self.call('/app/launch', {'VALUE': {'NAME_SPACE': namespace, 'APP_ID': str(app_id), 'MESSAGE': message}})
 
+    def tv_is_on(self):
+        response = self.call('/state/device/power_mode')
+        return any(item.get('CNAME') == 'power_mode' and item.get('VALUE') == 1
+                   for item in response.get('ITEMS', []))
+
     def watcher(self):
         last_home = last_watchfree = 0.0
         while True:
             try:
+                if not self.tv_is_on():
+                    time.sleep(2)
+                    continue
                 value = self.call('/app/current').get('ITEM', {}).get('VALUE', {})
                 home = value.get('NAME_SPACE') == 4 and value.get('APP_ID') == '1'
                 watchfree = value.get('NAME_SPACE') == 4 and value.get('APP_ID') == '3014'
